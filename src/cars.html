@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Cars - Rideflex</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: 'var(--background)',
+                        foreground: 'var(--foreground)',
+                        primary: 'var(--primary)',
+                        'primary-foreground': 'var(--primary-foreground)',
+                        secondary: 'var(--secondary)',
+                        'secondary-foreground': 'var(--secondary-foreground)',
+                        accent: 'var(--accent)',
+                        'accent-foreground': 'var(--accent-foreground)',
+                        muted: 'var(--muted)',
+                        'muted-foreground': 'var(--muted-foreground)',
+                        card: 'var(--card)',
+                        'card-foreground': 'var(--card-foreground)',
+                        border: 'var(--border)',
+                        destructive: 'var(--destructive)',
+                        'destructive-foreground': 'var(--destructive-foreground)'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen bg-background text-foreground">
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-border sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-primary">Rideflex</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-foreground hover:text-primary transition-colors">Home</a>
+                    <a href="cars.html" class="text-primary font-medium">Cars</a>
+                    <a href="support.html" class="text-foreground hover:text-primary transition-colors">Support</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button onclick="openAuthModal()" class="text-foreground hover:text-primary transition-colors">Sign In</button>
+                    <button onclick="openAuthModal()" class="bg-accent hover:bg-accent/90 text-accent-foreground px-4 py-2 rounded-lg transition-colors">Get Started</button>
+                </div>
+                <div class="md:hidden">
+                    <button onclick="toggleMobileMenu()" class="text-foreground hover:text-primary">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile Menu Overlay -->
+            <div id="mobile-menu-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden" onclick="closeMobileMenu()"></div>
+            <div id="mobile-menu" class="fixed top-0 right-0 h-full w-3/4 max-w-xs bg-white shadow-lg z-50 transform translate-x-full transition-transform duration-300 ease-in-out md:hidden">
+                <div class="flex justify-between items-center p-4 border-b">
+                    <span class="text-2xl font-bold text-primary">Menu</span>
+                    <button onclick="closeMobileMenu()" aria-label="Close menu" class="text-foreground hover:text-primary">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="flex flex-col space-y-4 p-4">
+                    <a href="index.html" class="text-foreground hover:text-primary transition-colors">Home</a>
+                    <a href="cars.html" class="text-primary font-medium">Cars</a>
+                    <a href="support.html" class="text-foreground hover:text-primary transition-colors">Support</a>
+                    <button onclick="openAuthModal();closeMobileMenu()" class="text-foreground hover:text-primary transition-colors text-left">Sign In</button>
+                    <button onclick="openAuthModal();closeMobileMenu()" class="bg-accent hover:bg-accent/90 text-accent-foreground px-4 py-2 rounded-lg transition-colors text-left">Get Started</button>
+                </div>
+            </div>
+                </div>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden pb-4">
+                <div class="space-y-2">
+                    <a href="index.html" class="block text-foreground hover:text-primary transition-colors py-2">Home</a>
+                    <a href="cars.html" class="block text-primary font-medium py-2">Cars</a>
+                    <a href="support.html" class="block text-foreground hover:text-primary transition-colors py-2">Support</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search & Filters Section -->
+    <section class="bg-orange-500 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-lg p-6 shadow-lg">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Find Your Perfect Car</h2>
+                <form class="space-y-4" onsubmit="handleSearch(event)">
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Pickup Location</label>
+                            <select id="pickup-location" class="w-full p-3 rounded-lg border border-gray-300" required>
+                                <option value="">Select location</option>
+                                <option value="manila-bgc">Manila - BGC</option>
+                                <option value="manila-makati">Manila - Makati</option>
+                                <option value="manila-ortigas">Manila - Ortigas</option>
+                                <option value="manila-alabang">Manila - Alabang</option>
+                                <option value="cebu-city">Cebu City</option>
+                                <option value="davao-city">Davao City</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Pickup Date</label>
+                            <input type="date" id="pickup-date" class="w-full p-3 rounded-lg border border-gray-300" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Drop-off Date</label>
+                            <input type="date" id="dropoff-date" class="w-full p-3 rounded-lg border border-gray-300" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Car Type</label>
+                            <select id="car-category" class="w-full p-3 rounded-lg border border-gray-300">
+                                <option value="">All Types</option>
+                                <option value="sedan">Sedan</option>
+                                <option value="suv">SUV</option>
+                                <option value="van">Van</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4 items-end">
+                        <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-medium transition-colors">
+                            Search Cars
+                        </button>
+                        <button type="button" onclick="clearFilters()" class="text-gray-600 hover:text-gray-800 px-4 py-3">
+                            Clear Filters
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Car Listings -->
+    <section class="py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Sidebar Filters -->
+                <div class="lg:w-1/4">
+                    <div class="bg-white border border-border rounded-lg p-6 sticky top-24">
+                        <h3 class="text-lg font-semibold mb-4">Filters</h3>
+                        
+                        <!-- Price Range -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Price Range (per day)</label>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="radio" name="price" value="" class="mr-2" checked>
+                                    <span>All Prices</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="price" value="0-2000" class="mr-2">
+                                    <span>₱0 - ₱2,000</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="price" value="2000-4000" class="mr-2">
+                                    <span>₱2,000 - ₱4,000</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="price" value="4000+" class="mr-2">
+                                    <span>₱4,000+</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Features -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Features</label>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" name="features" value="automatic" class="mr-2">
+                                    <span>Automatic</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" name="features" value="ac" class="mr-2">
+                                    <span>Air Conditioning</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" name="features" value="gps" class="mr-2">
+                                    <span>GPS Navigation</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" name="features" value="bluetooth" class="mr-2">
+                                    <span>Bluetooth</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <button onclick="applyFilters()" class="w-full bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition-colors">
+                            Apply Filters
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Car Grid -->
+                <div class="lg:w-3/4">
+                    <div class="flex justify-between items-center mb-6">
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-900">Available Cars</h2>
+                            <p class="text-gray-600" id="results-count">Showing all cars</p>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <select id="sort-by" class="border border-gray-300 rounded-lg px-3 py-2" onchange="sortCars()">
+                                <option value="recommended">Recommended</option>
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                                <option value="rating">Rating</option>
+                                <option value="name">Name</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="car-grid" class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+                        <!-- Cars will be populated by JavaScript -->
+                    </div>
+
+                    <!-- No results message -->
+                    <div id="no-results" class="hidden text-center py-12">
+                        <div class="text-gray-400 text-6xl mb-4">🚗</div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">No cars found</h3>
+                        <p class="text-gray-600 mb-4">Try adjusting your search criteria or filters</p>
+                        <button onclick="clearFilters()" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg transition-colors">
+                            Clear All Filters
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-900">Sign In</h3>
+                <button onclick="closeAuthModal()" class="text-gray-500 hover:text-gray-700">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <form class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                    <input type="email" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="your.email@example.com" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                    <input type="password" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="Your password" required>
+                </div>
+                <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-lg font-medium transition-colors">
+                    Sign In
+                </button>
+            </form>
+            <p class="text-center text-gray-600 mt-4">
+                Don't have an account? <a href="#" class="text-orange-500 hover:text-orange-600">Sign up</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="scripts/main.js"></script>
+    <script src="scripts/cars.js"></script>
+</body>
+</html>

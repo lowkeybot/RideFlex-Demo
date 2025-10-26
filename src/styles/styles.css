@@ -1,0 +1,335 @@
+/* Rideflex - Custom CSS Variables and Styles */
+
+:root {
+  --font-size: 16px;
+  --background: #ffffff;
+  --foreground: #2D363F;
+  --card: #ffffff;
+  --card-foreground: #2D363F;
+  --popover: #ffffff;
+  --popover-foreground: #2D363F;
+  --primary: #00285F;
+  --primary-foreground: #ffffff;
+  --secondary: #F2F2F2;
+  --secondary-foreground: #2D363F;
+  --muted: #F2F2F2;
+  --muted-foreground: #2D363F;
+  --accent: #FF9900;
+  --accent-foreground: #ffffff;
+  --destructive: #D92C1D;
+  --destructive-foreground: #ffffff;
+  --border: rgba(45, 54, 63, 0.1);
+  --input: transparent;
+  --input-background: #F2F2F2;
+  --switch-background: #2D363F;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: #00285F;
+  --chart-1: #00285F;
+  --chart-2: #2D363F;
+  --chart-3: #FF9900;
+  --chart-4: #F2F2F2;
+  --chart-5: #D92C1D;
+  --radius: 0.625rem;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #2D363F;
+  --sidebar-primary: #00285F;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #F2F2F2;
+  --sidebar-accent-foreground: #2D363F;
+  --sidebar-border: rgba(45, 54, 63, 0.1);
+  --sidebar-ring: #00285F;
+}
+
+.dark {
+  --background: #2D363F;
+  --foreground: #ffffff;
+  --card: #2D363F;
+  --card-foreground: #ffffff;
+  --popover: #2D363F;
+  --popover-foreground: #ffffff;
+  --primary: #ffffff;
+  --primary-foreground: #00285F;
+  --secondary: #00285F;
+  --secondary-foreground: #ffffff;
+  --muted: #00285F;
+  --muted-foreground: #F2F2F2;
+  --accent: #FF9900;
+  --accent-foreground: #ffffff;
+  --destructive: #D92C1D;
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.1);
+  --ring: #FF9900;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --chart-1: #ffffff;
+  --chart-2: #F2F2F2;
+  --chart-3: #FF9900;
+  --chart-4: #00285F;
+  --chart-5: #D92C1D;
+  --sidebar: #00285F;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #ffffff;
+  --sidebar-primary-foreground: #00285F;
+  --sidebar-accent: #2D363F;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-ring: #FF9900;
+}
+
+/* Base typography styles */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: var(--font-size);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
+  line-height: 1.5;
+}
+
+/* Typography */
+h1 {
+  font-size: 2.25rem;
+  font-weight: var(--font-weight-medium);
+  line-height: 1.2;
+  margin: 0;
+}
+
+h2 {
+  font-size: 1.875rem;
+  font-weight: var(--font-weight-medium);
+  line-height: 1.3;
+  margin: 0;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-medium);
+  line-height: 1.4;
+  margin: 0;
+}
+
+h4 {
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-medium);
+  line-height: 1.4;
+  margin: 0;
+}
+
+p {
+  font-size: 1rem;
+  font-weight: var(--font-weight-normal);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Links */
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.2s ease;
+}
+
+/* Form elements */
+input, select, textarea, button {
+  font-family: inherit;
+  font-size: 1rem;
+  border: none;
+  outline: none;
+}
+
+input, select, textarea {
+  background-color: var(--input-background);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  width: 100%;
+  transition: border-color 0.2s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(0, 40, 95, 0.1);
+}
+
+button {
+  cursor: pointer;
+  font-weight: var(--font-weight-medium);
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Utility classes to supplement Tailwind */
+.btn-primary {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  padding: 0.75rem 1.5rem;
+}
+
+.btn-primary:hover {
+  background-color: rgba(0, 40, 95, 0.9);
+}
+
+.btn-accent {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+  padding: 0.75rem 1.5rem;
+}
+
+.btn-accent:hover {
+  background-color: rgba(255, 153, 0, 0.9);
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid currentColor;
+  padding: 0.75rem 1.5rem;
+}
+
+.btn-outline:hover {
+  background-color: currentColor;
+  color: var(--background);
+}
+
+/* Card components */
+.card {
+  background-color: var(--card);
+  color: var(--card-foreground);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+/* Badge components */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-medium);
+  border: 1px solid transparent;
+}
+
+.badge-secondary {
+  background-color: var(--secondary);
+  color: var(--secondary-foreground);
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.slide-in-up {
+  animation: slideInUp 0.3s ease-out;
+}
+
+/* Navigation specific styles */
+.nav-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(8px);
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Mobile responsiveness helpers */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  .text-5xl {
+    font-size: 2.5rem !important;
+  }
+  
+  .text-6xl {
+    font-size: 3rem !important;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #2D363F;
+    --foreground: #ffffff;
+    --card: #2D363F;
+    --card-foreground: #ffffff;
+    --border: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Focus styles for accessibility */
+*:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Loading states */
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+/* Hover effects */
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--muted-foreground);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
